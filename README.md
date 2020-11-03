@@ -9,12 +9,11 @@ Executive Summary, Presentation Slides, and R Code can be found in the repositor
 
 Overview:
 
-Aims to further the UN's 4th Goal: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all" in the context of the Data Science course mentioned above. 
+This project aims to outline current problematic trends with the 'Data Science for High School' course administered by Virtual High School and attempts to propose a solution that will remediate the issues, hence improving the quality of education students receive. In this context, it aims to further the fourth sustainable development goal laid out by the United Nations: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all."
 
-Required analysis of historical data set pertaining to the Data Science course to come up with solutions to improve course quality.
+The dataset was provided for analysis by Virtual High School, the administrator of the course and pertained to the historical data of student performance in the Data Science course. 
 
-Visualizations made in R
+Visualizations were created in R.
 
-Data Set provided by VHS
+Sentiment Analysis performed with Twitter and AFINN Lists.
 
-Sentiment Analysis performed with Twitter and AFINN Lists
