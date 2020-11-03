@@ -1,5 +1,5 @@
 # Data Science Capstone Project
-IDC4U DAT a1+, Interdisciplinary Studies: Data Science, 12, University Capstone Project
+Course Title: IDC4U DAT a1+, Interdisciplinary Studies: Data Science, 12, University Capstone Project
 
 Video presentation can be viewed here: https://drive.google.com/file/d/1vLEhcxmSDXiRWJrnWzDAJ9mqTnWSKiRn/view?usp=sharing
 
