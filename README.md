@@ -11,6 +11,8 @@ Overview:
 
 Aims to further the UN's 4th Goal: "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all" in the context of the Data Science course mentioned above. 
 
+Required analysis of historical data set pertaining to the Data Science course to come up with solutions to improve course quality.
+
 Visualizations made in R
 
 Data Set provided by VHS
