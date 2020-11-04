@@ -7,8 +7,8 @@ xtabs(~ student_data$PassFail +student_data$PassFail, data = student_data)
 cat("Percentage of Pass grades: ", response_rate <- mean(student_data$PassFail == " Pass "), "\n")
 cat("Percentage of Fail grades: ", response_rate <- mean(student_data$PassFail == " No Pass "), "\n")
 
-#graphing functions that are used throughout 
-#graph for age and gender function using inherent R barplot and legend capabilities
+#Graphing functions that are used throughout 
+#Graph for age and gender function using inherent R barplot and legend capabilities
 Graph_gender <- function(x,y,z){
 counts <- table(x, y)
 barplot(counts, main=z,
@@ -25,7 +25,7 @@ legend("top",
        horiz = F , 
 )
 }
-#graphing evalutation ratings function using GGplot2
+#Graphing evalutation ratings function using GGplot2
 library(ggplot2)
 Graph_eval <- function(x,y){
         pf <- data.frame(Evaluation = c(x))
@@ -36,47 +36,47 @@ Graph_eval <- function(x,y){
 }   
 
 
-#graphically show distribution by age and gender for all students
+#Graphically show distribution by age and gender for all students
 Graph_gender(student_data$Gender, student_data$Age, "Students by Age and Gender")
-#graphically show evalutation ratings
+#Graphically show evalutation ratings
 library(ggplot2)
 pass_student <- subset(student_data, student_data$PassFail == " Pass ")
 Graph_eval(pass_student$Course.Evaluation,"Course Evaluation Ratings from Passing Students")
 
-#find out gender and age distribution exact numbers for overall stats using cross tabulations
+#Find out gender and age distribution exact numbers for overall stats using cross tabulations
 xtabs(~ student_data$Gender + student_data$Gender, data = student_data)
 xtabs(~ student_data$Age + student_data$Age, data = student_data)
 xtabs(~ student_data$Age + student_data$Age + student_data$Gender, data = student_data)
         
 
-#find out median overall score (using median function because of outliers of ppl that drop the course partway through)
+#Find out median overall score (using median function because of outliers of ppl that drop the course partway through)
 #NA results omitted using na.omit
 student_data_no_na = na.omit(student_data)
 median(student_data_no_na$Overall)
 
 
 
-#filtering pass w/ distinction using subsetting
+#Filtering pass w/ distinction using subsetting
 pass_distinction <- subset(pass_student, pass_student$Overall > 85)
 
 
-#find out gender and age distribution numerically using cross tabulation
+#Find out gender and age distribution numerically using cross tabulation
 xtabs(~ pass_distinction$Gender + pass_distinction$Gender, data = pass_distinction)
 xtabs(~ pass_distinction$Age + pass_distinction$Age, data = pass_distinction)
-#create stacked bargraph of male female distribution by age using functions defined previously
+#Create stacked bargraph of male female distribution by age using functions defined previously
 Graph_gender(pass_distinction$Gender, pass_distinction$Age, "High Distinction Students by Age and Gender")
-#representing student evaluation ratings using GGplot2
+#Representing student evaluation ratings using GGplot2
 Graph_eval(pass_distinction$Course.Evaluation,"Frequency of Evalutions for Pass With Distinction Students")
 
 #Check to see if they do noticebly better or worse in any modules
-#getting relevant columns only
+#Getting relevant columns only
 distinguished_mean <- pass_distinction[-c(1,2,3,26,27,28)]
 distinguished_mean <- as.data.frame(apply(distinguished_mean, 2, as.numeric))  # Convert all variable types to numeric
-#apply a function over df
+#Apply a function over df
 sapply(distinguished_mean, class)      
-#omitting NA entries
+#Omitting NA entries
 distinguished_mean<- na.omit(distinguished_mean)
-#converting to data frame
+#Converting to data frame
 distinguished_mean <- as.data.frame(apply(distinguished_mean, 2,mean,na.omit=TRUE))
 barplot(t(as.matrix(distinguished_mean)), xlab  = "Modules",
         ylab  = "Score",
@@ -88,30 +88,30 @@ xtabs(~ pass_distinction$Course.Evaluation + pass_distinction$Course.Evaluation,
 
 
 
-#filtering pass w/o distinction using subsetting
+#Filtering pass w/o distinction using subsetting
 pass_reg <- subset(pass_student, !(pass_student$Overall > 85))    
 
-#find out gender and age distribution using cross tabulations
+#Find out gender and age distribution using cross tabulations
 xtabs(~ pass_reg$Gender + pass_reg$Gender, data = pass_reg)
 xtabs(~ pass_reg$Age + pass_reg$Age, data = pass_reg)
 
 
-#cross tabulating and create stacked bargraph of male female distribution by age for pass w/o high dist. students
+#Cross tabulating and create stacked bargraph of male female distribution by age for pass w/o high dist. students
 xtabs(~ pass_reg$Course.Evaluation + pass_reg$Course.Evaluation, data = pass_reg)
 Graph_gender(pass_reg$Gender, pass_reg$Age, "Pass w/o High Distinction Students by Age and Gender")
 
 
-#create graph of evaluation ratings
+#Create graph of evaluation ratings
 Graph_eval(pass_reg$Course.Evaluation,"Frequency of Evalutions for Pass w/o Distinction Students")
 
 #Check to see if they do noticebly better or worse in any modules
 reg_pass_mean <- pass_reg[-c(1,2,3,26,27,28)]
 reg_pass_mean <- as.data.frame(apply(reg_pass_mean, 2, as.numeric))  # Convert all variable types to numeric
-#applying function over df
+#Applying function over df
 sapply(reg_pass_mean, class)      
 reg_pass_mean<- na.omit(reg_pass_mean)
 reg_pass_mean <- as.data.frame(apply(reg_pass_mean, 2,mean,na.omit=TRUE))
-#graphing with barplot function
+#Graphing with barplot function
 barplot(t(as.matrix(reg_pass_mean)), xlab  = "Modules",
         ylab  = "Score",
         main  = "Barplot of mean score per module for Pass w/o High Distinction Students  ",
@@ -121,26 +121,26 @@ barplot(t(as.matrix(reg_pass_mean)), xlab  = "Modules",
 xtabs(~ pass_distinction$Course.Evaluation + pass_distinction$Course.Evaluation, data = pass_distinction)
 
 
-#running similar tests on no pass
+#Running similar tests on no pass
 
-#find out gender and age distribution using subsetting and cross tabulation 
+#Find out gender and age distribution using subsetting and cross tabulation 
 fail_student <- subset(student_data, student_data$PassFail == " No Pass ")
 xtabs(~ fail_student$Gender + fail_student$Gender, data = fail_student)
 xtabs(~ fail_student$Age + fail_student$Age, data = fail_student)
 
-#create stacked bargraph of male female distribution by age using user created functions
+#Create stacked bargraph of male female distribution by age using user created functions
 Graph_gender(fail_student$Gender, fail_student$Age, "No Pass Students by Age and Gender")
 
 
 #Check to see if they do noticebly better or worse in any modules
 fail_student_mean <- fail_student[-c(1,2,3,26,27,28)]
 fail_student_mean <- as.data.frame(apply(fail_student_mean, 2, as.numeric))  # Convert all variable types to numeric
-#applying function over df
+#Applying function over df
 sapply(fail_student_mean, class)  
-#omitting NA values
+#Amitting NA values
 fail_student_mean<- na.omit(fail_student_mean)
 fail_student_mean <- as.data.frame(apply(fail_student_mean, 2,mean,na.omit=TRUE))
-#graphing via barplot function
+#Graphing via barplot function
 barplot(t(as.matrix(fail_student_mean)), xlab  = "Modules",
         ylab  = "Score",
         main  = "Barplot of mean score per module for No Pass Students  ",
@@ -148,18 +148,18 @@ barplot(t(as.matrix(fail_student_mean)), xlab  = "Modules",
 
 
 
-#mean avg score per module graphed
-#first, subset the modules
+#Mean avg score per module graphed
+#First, subset the modules
 modules <- student_data[-c(1,2,3,26,27,28)]
-#subset average columns
+#Subset average columns
 avg_modules <- modules[c(5,10,15,20,22)]
 avg_modules <- as.data.frame(apply(avg_modules, 2, as.numeric))  # Convert all variable types to numeric
-#apply function over df
+#Apply function over df
 sapply(avg_modules, class)      
-#omit na values
+#Omit na values
 avg_modules<- na.omit(avg_modules)
 avg_modules <- as.data.frame(apply(avg_modules, 2,mean,na.omit=TRUE))
-#graph with barplot functions
+#Graph with barplot functions
 barplot(t(as.matrix(avg_modules)), xlab  = "Modules",
         ylab  = "Score",
         main  = "Barplot of mean score per module",
@@ -169,8 +169,8 @@ barplot(t(as.matrix(avg_modules)), xlab  = "Modules",
 
 
 
-#sentiment analysis
-#install + load necessary libraries
+#Sentiment analysis
+#Install + load necessary libraries
 install.packages("ROAuth")
 install.packages("twitteR")
 library(twitteR)
@@ -179,7 +179,7 @@ library(NLP)
 library(tm)
 library(quanteda)
 library(ggplot2)
-#omitting keys ( as it is linked to my twitter)
+#Omitting keys ( as it is linked to my twitter)
 api_key = "xxxx" # your api_key
 api_secret = "xxxx" # your api_secret 
 access_token = "xxxx" # your access_token 
@@ -209,10 +209,10 @@ Sentiment_df <- gsub("rt", "", Sentiment_df)
 cat(head(Sentiment_df))
 Sentiment_df <- iconv(Sentiment_df, "latin1", "ASCII",sub="")
 Sentiment_df <- tolower(Sentiment_df)
-#tokenizing each tweet by word
+#Tokenizing each tweet by word
 Sentiment_df_token <- tokens(Sentiment_df, what = "word", remove_punct = TRUE, remove_numbers = TRUE)
 Sentiment_df_token
-#creating document term matrix
+#Creating document term matrix
 Sentiment_df_tdmCreator <- function(Sentiment_df_token, stemDoc = T, rmStopwords = T){
         
         tdm <- Corpus(VectorSource(Sentiment_df))
@@ -235,14 +235,14 @@ library(wordcloud)
 Sentiment_df_tdmCreator <- Sentiment_df_tdmCreator(Sentiment_df_token)
 dim(Sentiment_df_tdmCreator)
 Sentiment_df_top25<- Sentiment_df_tdmCreator[1:25,]
-#graphing via ggplot2
+#Graphing via ggplot2
 Sentiment_df_plot <- ggplot(Sentiment_df_top25, aes(x = reorder(term, freq), y = freq)) +
         geom_bar(stat = "identity", fill = "red") +
         xlab("Most Used") + ylab("How Often") +
         coord_flip() + theme(text=element_text(size=10,face="bold"))
 
 Sentiment_df_plot
-#matching words using AFINN list
+#Matching words using AFINN list
 afinn_list <- read.delim(file='AFINN-111.txt', header=FALSE, stringsAsFactors=FALSE)
 names(afinn_list) <- c('word', 'score')
 
@@ -252,17 +252,17 @@ Sentiment_df_2 <- data.frame(Sentiment_df_tdmCreator$term)
 
 matched_sentiment <- unique(rbind(merge(Sentiment_df_2, afinn_list, by.x = "Sentiment_df_tdmCreator.term", by.y = "word", all.x = FALSE)))
 
-#see how many words matched
+#See how many words matched
 NROW(matched_sentiment)
 
-#How many words were there in total?
+#List total amount of words
 NROW(Sentiment_df_tdmCreator$term)
 
 
-#percentage of words matched
+#Percentage of words matched
 round(NROW(matched_sentiment)/NROW(Sentiment_df_tdmCreator$term), 2) * 100
 
-#average score for matched words
+#Average score for matched words
 sum(matched_sentiment$score)
 NROW(matched_sentiment$score)
 sum(matched_sentiment$score) / NROW(matched_sentiment$score)
